@@ -3,21 +3,34 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BindingJson"
+        xmlns:local="clr-namespace:BindingJson" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TreeView Name="treeView">
-        <TreeView.ItemTemplate>
-            <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                <StackPanel Orientation="Horizontal">
-                    <!-- 显示Header属性 -->
-                    <TextBlock Text="{Binding Header}"/>
-                    <!-- 显示JToken的Type属性 -->
-                    <TextBlock Text="{Binding Token.Type}" Margin="10 0 0 0" Foreground="Gray"/>
-                </StackPanel>
-            </HierarchicalDataTemplate>
-        </TreeView.ItemTemplate>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TreeView Name="treeView" Grid.Column="0">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                    <StackPanel Orientation="Horizontal">
+                        <!-- 显示Header属性 -->
+                        <TextBlock Text="{Binding Header}"/>
+                        <!-- 显示JToken的Type属性 -->
+                        <TextBlock Text="{Binding Token.Type}" Margin="10 0 0 0" Foreground="Gray"/>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
         </TreeView>
+        
+        <xctk:PropertyGrid x:Name="PropertyGrid" Grid.Column="1" AutoGenerateProperties="False">
+            <!-- Only the following properties will be displayed in the PropertyGrid -->
+            <xctk:PropertyGrid.PropertyDefinitions>
+                <xctk:PropertyDefinition TargetProperties="FirstName" />
+                <xctk:PropertyDefinition TargetProperties="FavoriteColor" />
+                <xctk:PropertyDefinition TargetProperties="PetNames" />
+            </xctk:PropertyGrid.PropertyDefinitions>
+        </xctk:PropertyGrid>
     </Grid>
 </Window>

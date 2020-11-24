@@ -32,7 +32,7 @@ namespace BindingJson
         {
             //创建JObject
             //textfile1.txt存储着需要解析的JSON数据
-            var jobj = JObject.Parse(System.IO.File.ReadAllText("textfile1.txt"));
+            var jobj = JObject.Parse(System.IO.File.ReadAllText(Environment.CurrentDirectory + "\\..\\..\\TestData.txt"));
             //创建TreeView的数据源
             treeView.ItemsSource = jobj.Children().Select(c => JsonHeaderLogic.FromJToken(c));
         }
